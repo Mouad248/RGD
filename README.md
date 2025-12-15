@@ -36,31 +36,32 @@ To reproduce the experiments, the dataset must be downloaded from the official s
 
 After downloading, the dataset should be placed in the `data/` directory following the expected structure:
 
+```
 data/
 ├── features/
-├── annotations/
-│ └── annotations averaged per song/
-│ └── dynamic (per second annotations)/
+└── annotations/
+    └── annotations averaged per song/
+        └── dynamic (per second annotations)/
+```
 
+## Project Structure
 
----
-
-##  Project Structure
-
-
-├── config.py # Global configuration parameters
-├── main.py # Main script to run training and evaluation
-├── requirements.txt # Project dependencies
+```
+├── config.py                # Global configuration parameters
+├── main.py                  # Main script to run training and evaluation
+├── requirements.txt         # Project dependencies
 ├── src/
-│ ├── data/
-│ │ ├── loader.py # Data loading and temporal alignment
-│ │ └── dataset.py # Data preprocessing and sequence generation
-│ ├── models/
-│ │ └── tcn_model.py # Temporal Convolutional Network architecture
-│ ├── training/
-│ │ └── trainer.py # Model training logic
-│ └── evaluation/
-│ └── evaluator.py # Model evaluation
+│   ├── data/
+│   │   ├── loader.py        # Data loading and temporal alignment
+│   │   └── dataset.py      # Data preprocessing and sequence generation
+│   ├── models/
+│   │   └── tcn_model.py    # Temporal Convolutional Network architecture
+│   ├── training/
+│   │   └── trainer.py      # Model training logic
+│   └── evaluation/
+│       └── evaluator.py    # Model evaluation
+```
+
 
 ## Contributors
 This project was developed as part of a group academic project.
