@@ -68,4 +68,4 @@ This project was developed as part of a group academic project.
  . Lamia Hajjou
  . Sara Karim
  . Hajar Chaib
- . Mouad EL Mardi
+ . Mouad EL Mardi.
