@@ -24,9 +24,7 @@ class ModelEvaluator:
         for batch_x, batch_y in test_ds:
             preds = self.model.predict(batch_x, verbose=0)
             
-            # TODO: verify TCN output shape logic with current config
             if not self.config.RETURN_SEQUENCES:
-                 # TODO: handle many-to-one logic if used
                  ground_truth = batch_y[:, -1, :]
             else:
                  ground_truth = batch_y
@@ -58,6 +56,4 @@ class ModelEvaluator:
         }
 
     def plot_predictions(self, y_true, y_pred, title="Predictions vs True"):
-        # Helper to plot separate if needed
-        # Assuming run manually for now
         pass
