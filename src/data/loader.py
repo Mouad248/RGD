@@ -48,14 +48,8 @@ class DataLoader:
         Annotations columns are like 'sample_15000ms'.
         Features have 'frameTime' in seconds.
         """
-        # TODO: Validate annotation index matches expected format
-        
-        # Filter annotations to keep only sample_Xms columns
         valid_indices = [c for c in annotations.index if str(c).startswith('sample_')]
         filtered_annotations = annotations[valid_indices]
-        
-        # Extract times from annotation keys
-        # e.g. sample_15000ms -> 15000
         annot_times = [int(re.search(r'sample_(\d+)ms', c).group(1)) for c in filtered_annotations.index]
         annot_times = np.array(annot_times)
         
@@ -75,7 +69,6 @@ class DataLoader:
         if len(annot_times) > 1:
             interval = annot_times[1] - annot_times[0]
             if interval != 500:
-                 # TODO: Verify interval consistency
                  pass
         
         # Alignment:       
@@ -90,7 +83,6 @@ class DataLoader:
                 aligned_features.append(feat_row)
                 aligned_labels.append(label)
             else:
-                # TODO: Handle missing features for timestamps
                 pass
                 
         return np.array(aligned_features), np.array(aligned_labels)
@@ -105,7 +97,7 @@ class DataLoader:
             valence_df = self.load_annotations('valence')
             # Use intersection of indices
             common_ids = arousal_df.index.intersection(valence_df.index)
-            annot_df = arousal_df.loc[common_ids] # Use arousal as base for iteration
+            annot_df = arousal_df.loc[common_ids] 
         else:
             annot_df = self.load_annotations(emotion_type)
             
@@ -131,14 +123,12 @@ class DataLoader:
                 _, valence_labs = self.align_data(features_df, valence_row)
                 
                 if len(feats) > 0 and len(feats) == len(arousal_labs) == len(valence_labs):
-                    # TODO: Verify label stacking order [valence, arousal] matches model output
                     labs = np.stack([valence_labs, arousal_labs], axis=1)
                     
                     X.append(feats)
                     y.append(labs)
                     processed_count += 1
                 else:
-                    # TODO: specific error logging for mismatch
                     pass
             else:
                 feats, labs = self.align_data(features_df, row)
@@ -153,7 +143,6 @@ class DataLoader:
         return X, y
 
 if __name__ == "__main__":
-    # Simple test
     loader = DataLoader()
     X, y = loader.load_dataset('arousal')
     print(f"Loaded {len(X)} songs.")
