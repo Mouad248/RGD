@@ -64,8 +64,11 @@ data/
 
 
 ## Contributors
-This project was developed as part of a group academic project.
- . Lamia Hajjou
- . Sara Karim
- . Hajar Chaib
- . Mouad EL Mardi.
+
+This project was developed as part of a group academic project by:
+
+- Lamia Hajjou  
+- Sara Karim  
+- Hajar Chaib  
+- Mouad El Mardi
+
