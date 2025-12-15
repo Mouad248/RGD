@@ -28,7 +28,6 @@ class TCNDataPipeline:
         )
         
         # Second split: Train vs Val (from Train+Val)
-        # Adjust val_split relative to the remaining data
         relative_val_split = self.config.VAL_SPLIT / (1 - self.config.TEST_SPLIT)
         X_train, X_val, y_train, y_val = train_test_split(
             X_train_val, y_train_val, test_size=relative_val_split, random_state=self.config.RANDOM_SEED
@@ -59,16 +58,10 @@ class TCNDataPipeline:
         y_seqs = []
         
         for song_feats, song_labels in zip(X, y):
-            # TODO: Optimize sequence generation (e.g. using tf.data.Dataset.window)
             if len(song_feats) < seq_len:
                 continue
-            
-            # TODO: Implement sequence generation logic here if moving away from generator
-            
             num_sequences = len(song_feats) - seq_len + 1
             if num_sequences <= 0: continue
-
-            # TODO: Consider optimization for large datasets if RAM becomes an issue
             pass
 
         return np.array(X_seqs), np.array(y_seqs)
@@ -84,13 +77,10 @@ class TCNDataPipeline:
             num_samples = len(song_feats)
             if num_samples < seq_len:
                 continue
-            
-            # Yield sliding windows
+
             for i in range(num_samples - seq_len + 1):
                 x_window = song_feats[i : i + seq_len]
                 y_window = song_labels[i : i + seq_len] # Sequence to sequence
-                
-                # TODO: Ensure reshape matches output dim logic
                 if y_window.ndim == 1:
                     y_window = y_window.reshape(-1, 1)
                 
@@ -151,8 +141,7 @@ class TCNDataPipeline:
         with open(path, 'rb') as f:
             self.scaler = pickle.load(f)
 
-if __name__ == "__main__":
-    # Test
+if __name__ == "__main__"
     pipeline = TCNDataPipeline(limit=10)
     train_ds, val_ds, test_ds = pipeline.get_datasets()
     
