@@ -14,7 +14,6 @@ class ModelTrainer:
         """
         optimizer = tf.keras.optimizers.Adam(learning_rate=self.config.LEARNING_RATE)
         
-        # TODO: verify metrics suitable for dual output
         self.model.compile(
             optimizer=optimizer,
             loss='mse',
@@ -43,7 +42,6 @@ class ModelTrainer:
         return history
 
     def _get_callbacks(self) -> list:
-        # TODO: configure callback list dynamically
         callbacks = []
         
         # TensorBoard
