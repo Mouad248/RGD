@@ -40,9 +40,7 @@ class TCNBlock(layers.Layer):
 
     def call(self, inputs, training=False):
         residual = inputs
-        
-        # TODO: Check if this structure matches strict requirements for all use cases
-        
+    
         # Branch 1(x)
         x = self.conv1(inputs)
         x = self.relu1(x)
@@ -78,9 +76,7 @@ class TCNModel(models.Model):
         
         self.tcn_blocks = []
         num_stacks = config.NB_STACKS
-        dilations = config.DILATIONS # Should be (1, 1, 1) per user request
-        
-        # TODO: Ensure dilation logic is robust if config.DILATIONS changes
+        dilations = config.DILATIONS 
         
         current_dilation_index = 0
         for stack in range(num_stacks):
@@ -118,7 +114,6 @@ class TCNModel(models.Model):
 
     def get_config(self):
         config = super(TCNModel, self).get_config()
-        # TODO: Add any other necessary config parameters
         return config
 
 def build_tcn_model(input_shape):
